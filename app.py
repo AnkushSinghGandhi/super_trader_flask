@@ -38,6 +38,14 @@ def get_purchase_history(user_id):
 def get_sell_history(user_id):
     return UserController.get_sell_history(user_id)
 
+@app.route('/user/<user_id>/favorite_stocks', methods=['POST'])
+def add_favorite_stocks(user_id):
+    return UserController.add_favorite_stocks(user_id)
+
+@app.route('/user/<user_id>/favorite_stocks', methods=['GET'])
+def get_favorite_stocks(user_id):
+    return UserController.get_favorite_stocks(user_id)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

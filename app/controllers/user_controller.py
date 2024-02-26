@@ -145,3 +145,23 @@ class UserController:
             return jsonify({'sell_history': sell_history})
         else:
             return jsonify({'error': 'User not found'}), 404
+
+    @staticmethod
+    def add_favorite_stocks(user_id):
+        data = request.get_json()
+        favorite_stocks = data.get('favorite_stocks', [])
+        user = UserModel.get_user_by_id(user_id)
+        if user:
+            UserModel.update_user(user_id, {'favorite_stocks': favorite_stocks})
+            return jsonify({'message': 'Favorite stocks updated successfully'})
+        else:
+            return jsonify({'error': 'User not found'}), 404
+
+    @staticmethod
+    def get_favorite_stocks(user_id):
+        user = UserModel.get_user_by_id(user_id)
+        if user:
+            favorite_stocks = user.get('favorite_stocks', [])
+            return jsonify({'favorite_stocks': favorite_stocks})
+        else:
+            return jsonify({'error': 'User not found'}), 404
