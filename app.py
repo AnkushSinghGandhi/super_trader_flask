@@ -3,8 +3,6 @@ from app.controllers.quote_controller import QuoteController
 from app.controllers.user_controller import UserController
 from flask import request
 
-# Routes
-
 # Routes for fetching stock data
 @app.route('/get_ltp', methods=['GET'])
 def get_ltp():
@@ -15,7 +13,7 @@ def get_ltp():
 def get_all_instrument_identifiers():
     return QuoteController.get_all_instrument_identifiers()
 
-# Routes for user authentication and stock trading
+# Routes for users
 @app.route('/login', methods=['POST'])
 def login():
     return UserController.login()
@@ -31,6 +29,14 @@ def buy():
 @app.route('/sell', methods=['POST'])
 def sell():
     return UserController.sell()
+
+@app.route('/user/<user_id>/purchase_history', methods=['GET'])
+def get_purchase_history(user_id):
+    return UserController.get_purchase_history(user_id)
+
+@app.route('/user/<user_id>/sell_history', methods=['GET'])
+def get_sell_history(user_id):
+    return UserController.get_sell_history(user_id)
 
 
 if __name__ == '__main__':

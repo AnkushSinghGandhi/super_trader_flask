@@ -94,6 +94,8 @@ class UserController:
             return jsonify({'error': 'User not found'}), 404
 
         # Retrieve the purchase details from the database
+        # This could be your MongoDB query to fetch the purchase data
+        # For demonstration purposes, let's assume a dummy purchase data
         purchase_data = {
             'datetime': datetime.now(),
             'user_id': user_id,
@@ -125,3 +127,21 @@ class UserController:
         UserModel.add_sale_to_history(user_id, sale_data)
 
         return jsonify({'message': 'Sale successful', 'sale_data': sale_data})
+
+    @staticmethod
+    def get_purchase_history(user_id):
+        user = UserModel.get_user_by_id(user_id)
+        if user:
+            purchase_history = user.get('purchase_history', [])
+            return jsonify({'purchase_history': purchase_history})
+        else:
+            return jsonify({'error': 'User not found'}), 404
+
+    @staticmethod
+    def get_sell_history(user_id):
+        user = UserModel.get_user_by_id(user_id)
+        if user:
+            sell_history = user.get('sell_history', [])
+            return jsonify({'sell_history': sell_history})
+        else:
+            return jsonify({'error': 'User not found'}), 404
