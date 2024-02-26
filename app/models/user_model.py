@@ -5,12 +5,13 @@ user_collection = db['users']
 class UserModel:
 
     @staticmethod
-    def create_user(username, password, email):
+    def create_user(username, password, email, role='user'):
         # Logic to create a new user account
         user_data = {
             'username': username,
             'password': password,
             'email': email,
+            'role':role, # Set user role
             'status': 'active',  # Set default status to active
             'purchase_history': [],  # Initialize purchase history as empty list
             'sale_history': [],  # Initialize sale history as empty list
