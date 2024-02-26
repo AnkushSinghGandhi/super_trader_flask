@@ -1,9 +1,5 @@
-from pymongo import MongoClient
-import certifi
+from app.config import db
 
-# Connect to MongoDB
-client = MongoClient('', tlsCAFile=certifi.where())
-db = client['MarketMaster']
 last_quote_array = db['last_quote_array']
 
 class QuoteModel:
