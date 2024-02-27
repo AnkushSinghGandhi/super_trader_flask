@@ -27,4 +27,84 @@
   </a>
 </p>
 
+# Super Trader Flask
+
+Welcome to **Super Trader Flask**, a Flask-based web application for trading stocks and managing user portfolios. This project aims to provide a platform where users can buy, sell, and track their favorite stocks easily.
+
+## Features
+
+- **User Authentication:** Users can register, login, and manage their accounts securely.
+- **Stock Trading:** Buy and sell stocks with real-time market data.
+- **Portfolio Management:** Track the stocks you own, view purchase history, and analyze performance.
+- **Favorite Stocks:** Add and remove favorite stocks for quick access.
+- **Admin Panel:** Manage user accounts, view transaction history, and monitor system activity.
+
+## Installation
+
+1. **Clone the repository:**
+   ```
+   git clone https://github.com/AnkushSinghGandhi/super_trader_flask.git
+   ```
+
+2. **Navigate to the project directory:**
+   ```
+   cd super_trader_flask
+   ```
+
+3. **Create a virtual environment** (optional but recommended):
+   ```
+   python -m venv venv
+   ```
+
+4. **Activate the virtual environment:**
+   - On Windows:
+     ```
+     venv\Scripts\activate
+     ```
+   - On macOS and Linux:
+     ```
+     source venv/bin/activate
+     ```
+
+5. **Install the required dependencies:**
+   ```
+   pip install -r requirements.txt
+   ```
+
+6. **Set up the database:**
+   - This project uses MongoDB as the database. Make sure you have MongoDB installed and running locally or update the database configuration in `app/config.py`.
+
+7. **Start the Flask server:**
+   ```
+   python app.py
+   ```
+
+8. **Access the application in your web browser** at `http://127.0.0.1:5000`.
+
+## Usage
+
+- Register a new account or login with existing credentials.
+- Explore the stock market and add your favorite stocks to track.
+- Buy and sell stocks based on real-time market data.
+- Monitor your portfolio performance and transaction history.
+- Admins can manage user accounts, view transaction logs, and perform system maintenance tasks.
+
+## Contributing
+
+Contributions are welcome! If you find any bugs or have suggestions for new features, please open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- **Flask:** [https://flask.palletsprojects.com/](https://flask.palletsprojects.com/)
+- **MongoDB:** [https://www.mongodb.com/](https://www.mongodb.com/)
+
+## Support
+
+For any questions or assistance, feel free to contact the project maintainer at [ankushsinghgandhi@gmail.com](mailto:your-ankushsinghgandhi@gmail.com).
+
+Thank you for using Super Trader Flask! Happy trading!
 
