@@ -1,6 +1,7 @@
 from app import app
 from app.controllers.quote_controller import QuoteController
 from app.controllers.user_controller import UserController
+from app.controllers.admin_controller import AdminController
 from flask import request
 
 # Routes for fetching stock data
@@ -13,7 +14,7 @@ def get_ltp():
 def get_all_instrument_identifiers():
     return QuoteController.get_all_instrument_identifiers()
 
-# Routes for users
+# Routes for user apis
 @app.route('/login', methods=['POST'])
 def login():
     return UserController.login()
@@ -45,6 +46,27 @@ def add_favorite_stocks(user_id):
 @app.route('/user/<user_id>/favorite_stocks', methods=['GET'])
 def get_favorite_stocks(user_id):
     return UserController.get_favorite_stocks(user_id)
+
+# Routes for admin apis
+@app.route('/create_admin', methods=['POST'])
+def create_admin():
+    return AdminController.create_admin()
+
+@app.route('/create_user', methods=['POST'])
+def create_user():
+    return AdminController.create_user()
+
+@app.route('/pause_user', methods=['POST'])
+def pause_user():
+    return AdminController.pause_user()
+
+@app.route('/ban_user', methods=['POST'])
+def ban_user():
+    return AdminController.ban_user()
+
+@app.route('/get_user_history/<user_id>', methods=['GET'])
+def get_user_history(user_id):
+    return AdminController.get_user_history(user_id)
 
 
 if __name__ == '__main__':
