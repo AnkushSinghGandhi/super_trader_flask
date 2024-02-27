@@ -28,14 +28,13 @@
 </p>
 
 # Super Trader Flask
-
-Welcome to **Super Trader Flask**, a Flask-based web application for trading stocks and managing user portfolios. This project aims to provide a platform where users can buy, sell, and track their favorite stocks easily.
+Super Trader is a Flask-based application designed for learning to trade stocks using live data. It allows users to view real-time & historic stock prices, make purchases, and track their favorite stocks & transaction history. Additionally, the admin panel provides features for managing user accounts, monitoring transactions, and more.
 
 ## Features
 
 - **User Authentication:** Users can register, login, and manage their accounts securely.
 - **Stock Trading:** Buy and sell stocks with real-time market data.
-- **Portfolio Management:** Track the stocks you own, view purchase history, and analyze performance.
+- **Portfolio Management:** Track the stocks you own, view purchase history and analyze performance.
 - **Favorite Stocks:** Add and remove favorite stocks for quick access.
 - **Admin Panel:** Manage user accounts, view transaction history, and monitor system activity.
 
