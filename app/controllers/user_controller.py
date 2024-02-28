@@ -15,11 +15,24 @@ class UserController:
         if user:
             hashed_password = user.get('password')
             if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
-                return jsonify({'message': 'Login successful'})
+                # Check role
+                role = user.get('role')
+                if role == 'admin':
+                    return jsonify({'message': 'Admin login successful'})
+                else:
+                    # Check account status
+                    status = user.get('status')
+                    if status == 'active':
+                        return jsonify({'message': 'User login successful'})
+                    elif status == 'paused':
+                        return jsonify({'error': 'Your account is paused. Please contact support.'}), 401
+                    elif status == 'banned':
+                        return jsonify({'error': 'Your account has been banned.'}), 401
             else:
                 return jsonify({'error': 'Invalid username or password'}), 401
         else:
             return jsonify({'error': 'User not found'}), 404
+
 
     @staticmethod
     def register():
