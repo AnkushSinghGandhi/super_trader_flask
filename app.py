@@ -39,13 +39,17 @@ def get_purchase_history(user_id):
 def get_sell_history(user_id):
     return UserController.get_sell_history(user_id)
 
-@app.route('/user/<user_id>/favorite_stocks', methods=['POST'])
-def add_favorite_stocks(user_id):
-    return UserController.add_favorite_stocks(user_id)
+@app.route('/user/<user_id>/favorite_symbols', methods=['POST'])
+def add_favorite_symbols(user_id):
+    return UserController.add_favorite_symbols(user_id)
 
-@app.route('/user/<user_id>/favorite_stocks', methods=['GET'])
-def get_favorite_stocks(user_id):
-    return UserController.get_favorite_stocks(user_id)
+@app.route('/user/<user_id>/favorite_symbols', methods=['GET'])
+def get_favorite_symbols(user_id):
+    return UserController.get_favorite_symbols(user_id)
+
+@app.route('/user/<user_id>/delete_favorite_symbols', methods=['POST'])
+def delete_favorite_symbols(user_id):
+    return UserController.delete_favorite_symbols(user_id)
 
 # Routes for admin apis
 @app.route('/create_admin', methods=['POST'])

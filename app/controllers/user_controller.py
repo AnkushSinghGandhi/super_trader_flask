@@ -33,7 +33,6 @@ class UserController:
         else:
             return jsonify({'error': 'User not found'}), 404
 
-
     @staticmethod
     def register():
         data = request.get_json()
@@ -160,7 +159,7 @@ class UserController:
             return jsonify({'error': 'User not found'}), 404
 
     @staticmethod
-    def add_favorite_stocks(user_id):
+    def add_favorite_symbols(user_id):
         data = request.get_json()
         favorite_stocks = data.get('favorite_stocks', [])
         user = UserModel.get_user_by_id(user_id)
@@ -171,10 +170,30 @@ class UserController:
             return jsonify({'error': 'User not found'}), 404
 
     @staticmethod
-    def get_favorite_stocks(user_id):
+    def get_favorite_symbols(user_id):
         user = UserModel.get_user_by_id(user_id)
         if user:
             favorite_stocks = user.get('favorite_stocks', [])
             return jsonify({'favorite_stocks': favorite_stocks})
+        else:
+            return jsonify({'error': 'User not found'}), 404
+
+    @staticmethod
+    def delete_favorite_symbols(user_id):
+        data = request.get_json()
+        stock_to_delete = data.get('favorite_stock', '') # Assuming you provide the stock symbol to delete
+
+        # Fetch the user data
+        user = UserModel.get_user_by_id(user_id)
+        if user:
+            # Check if the stock exists in the user's favorite stocks list
+            if stock_to_delete in user.get('favorite_stocks', []):
+                # Remove the stock from the favorite stocks list
+                favorite_stocks = [stock for stock in user.get('favorite_stocks') if stock != stock_to_delete]
+                # Update the user's favorite stocks list
+                UserModel.update_user(user_id, {'favorite_stocks': favorite_stocks})
+                return jsonify({'message': f'Stock {stock_to_delete} removed from favorites'})
+            else:
+                return jsonify({'error': f'Stock {stock_to_delete} not found in favorites'}), 404
         else:
             return jsonify({'error': 'User not found'}), 404
