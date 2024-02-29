@@ -88,6 +88,12 @@ Super Trader is a Flask-based application designed for learning to trade stocks 
 - Monitor your portfolio performance and transaction history.
 - Admins can manage user accounts, view transaction logs, and perform system maintenance tasks.
 
+## Flutter App
+Super Trader Flask works in conjunction with the Super Trader Flutter mobile app, which provides the user interface for trading stocks and managing portfolios. The Flutter app communicates with this backend server to fetch stock data, perform transactions, and manage user accounts.
+
+### Repository
+The Flutter app repository can be found at: https://github.com/AnkushSinghGandhi/super_trader_flutter
+
 ## Contributing
 
 Contributions are welcome! If you find any bugs or have suggestions for new features, please open an issue or submit a pull request.
