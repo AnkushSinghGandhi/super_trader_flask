@@ -14,6 +14,11 @@ def get_ltp():
 def get_all_instrument_identifiers():
     return QuoteController.get_all_instrument_identifiers()
 
+@app.route('/get_quote_details', methods=['GET'])
+def get_quote_details():
+    instrument_identifier = request.args.get('instrument_identifier')
+    return QuoteController.get_quote_details(instrument_identifier)
+
 # Routes for user apis
 @app.route('/login', methods=['POST'])
 def login():
