@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables file
+.env
+
+# Local development SQLite database file
+db.sqlite
+
+# IDE files
+.vscode/
+*.pydevproject
+.idea/
+*.swp
+
+# Mac OS specific
+.DS_Store
+
+# Compiled Python files
+*.pyc
+
+# Dependency directories
+venv/
+env/
