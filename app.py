@@ -1,8 +1,24 @@
-from app import app
-from app.controllers.quote_controller import QuoteController
+from flask import Flask, jsonify, request
+from flask_swagger_ui import get_swaggerui_blueprint
+from flasgger import Swagger
 from app.controllers.user_controller import UserController
 from app.controllers.admin_controller import AdminController
-from flask import request
+from app.controllers.quote_controller import QuoteController
+
+app = Flask(__name__)
+
+# Swagger configuration
+SWAGGER_URL = '/api/docs'
+API_URL = '/static/swagger.json'
+swagger_ui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "SuperTrader API Documentation"
+    }
+)
+app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
+swagger = Swagger(app)
 
 # Routes for fetching stock data
 @app.route('/get_ltp', methods=['GET'])
@@ -19,7 +35,7 @@ def get_quote_details():
     instrument_identifier = request.args.get('instrument_identifier')
     return QuoteController.get_quote_details(instrument_identifier)
 
-# Routes for user apis
+# Routes for user APIs
 @app.route('/login', methods=['POST'])
 def login():
     return UserController.login()
@@ -56,7 +72,7 @@ def get_favorite_symbols(user_id):
 def delete_favorite_symbols(user_id):
     return UserController.delete_favorite_symbols(user_id)
 
-# Routes for admin apis
+# Routes for admin APIs
 @app.route('/create_admin', methods=['POST'])
 def create_admin():
     return AdminController.create_admin()
@@ -76,7 +92,6 @@ def ban_user():
 @app.route('/get_user_history/<user_id>', methods=['GET'])
 def get_user_history(user_id):
     return AdminController.get_user_history(user_id)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
