@@ -189,7 +189,7 @@ def sell():
     """
     return UserController.sell()
 
-@app.route('/user/<user_id>/purchase_history', methods=['GET'])
+@app.route('/users/<user_id>/purchase_history', methods=['GET'])
 def get_purchase_history(user_id):
     """
     Get purchase history of a user.
@@ -210,7 +210,7 @@ def get_purchase_history(user_id):
     """
     return UserController.get_purchase_history(user_id)
 
-@app.route('/user/<user_id>/sell_history', methods=['GET'])
+@app.route('/users/<user_id>/sell_history', methods=['GET'])
 def get_sell_history(user_id):
     """
     Get sale history of a user.
@@ -231,7 +231,7 @@ def get_sell_history(user_id):
     """
     return UserController.get_sell_history(user_id)
 
-@app.route('/user/<user_id>/favorite_symbols', methods=['POST'])
+@app.route('/users/<user_id>/favorite_symbols', methods=['POST'])
 def add_favorite_symbols(user_id):
     """
     Add favorite symbols for a user.
@@ -259,7 +259,7 @@ def add_favorite_symbols(user_id):
     """
     return UserController.add_favorite_symbols(user_id)
 
-@app.route('/user/<user_id>/favorite_symbols', methods=['GET'])
+@app.route('/users/<user_id>/favorite_symbols', methods=['GET'])
 def get_favorite_symbols(user_id):
     """
     Get favorite symbols of a user.
@@ -280,7 +280,7 @@ def get_favorite_symbols(user_id):
     """
     return UserController.get_favorite_symbols(user_id)
 
-@app.route('/user/<user_id>/delete_favorite_symbols', methods=['POST'])
+@app.route('/users/<user_id>/delete_favorite_symbols', methods=['POST'])
 def delete_favorite_symbols(user_id):
     """
     Delete favorite symbols of a user.
