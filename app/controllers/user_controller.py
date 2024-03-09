@@ -159,41 +159,41 @@ class UserController:
             return jsonify({'error': 'User not found'}), 404
 
     @staticmethod
-    def add_favorite_symbols(user_id):
+    def add_watchlist_items(user_id):
         data = request.get_json()
-        favorite_stocks = data.get('favorite_stocks', [])
+        watchlist = data.get('watchlist', [])
         user = UserModel.get_user_by_id(user_id)
         if user:
-            UserModel.update_user(user_id, {'favorite_stocks': favorite_stocks})
-            return jsonify({'message': 'Favorite stocks updated successfully'})
+            UserModel.update_user(user_id, {'watchlist': watchlist})
+            return jsonify({'message': 'watchlist updated successfully'})
         else:
             return jsonify({'error': 'User not found'}), 404
 
     @staticmethod
-    def get_favorite_symbols(user_id):
+    def get_watchlist_items(user_id):
         user = UserModel.get_user_by_id(user_id)
         if user:
-            favorite_stocks = user.get('favorite_stocks', [])
-            return jsonify({'favorite_stocks': favorite_stocks})
+            watchlist = user.get('watchlist', [])
+            return jsonify({'watchlist': watchlist})
         else:
             return jsonify({'error': 'User not found'}), 404
 
     @staticmethod
-    def delete_favorite_symbols(user_id):
+    def delete_watchlist_items(user_id):
         data = request.get_json()
-        stock_to_delete = data.get('favorite_stock', '') # Assuming you provide the stock symbol to delete
+        stock_to_delete = data.get('watchlist', '') # Assuming you provide the stock symbol to delete
 
         # Fetch the user data
         user = UserModel.get_user_by_id(user_id)
         if user:
-            # Check if the stock exists in the user's favorite stocks list
-            if stock_to_delete in user.get('favorite_stocks', []):
-                # Remove the stock from the favorite stocks list
-                favorite_stocks = [stock for stock in user.get('favorite_stocks') if stock != stock_to_delete]
-                # Update the user's favorite stocks list
-                UserModel.update_user(user_id, {'favorite_stocks': favorite_stocks})
-                return jsonify({'message': f'Stock {stock_to_delete} removed from favorites'})
+            # Check if the stock exists in the user's watchlist
+            if stock_to_delete in user.get('watchlist', []):
+                # Remove the stock from the watchlist
+                watchlist = [stock for stock in user.get('watchlist') if stock != stock_to_delete]
+                # Update the user's watchlist
+                UserModel.update_user(user_id, {'watchlist': watchlist})
+                return jsonify({'message': f'Stock {stock_to_delete} removed from watchlist'})
             else:
-                return jsonify({'error': f'Stock {stock_to_delete} not found in favorites'}), 404
+                return jsonify({'error': f'Stock {stock_to_delete} not found in watchlist'}), 404
         else:
             return jsonify({'error': 'User not found'}), 404

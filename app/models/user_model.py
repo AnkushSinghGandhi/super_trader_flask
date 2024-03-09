@@ -15,7 +15,7 @@ class UserModel:
             'status': 'active',  # Set default status to active
             'purchase_history': [],  # Initialize purchase history as empty list
             'sale_history': [],  # Initialize sale history as empty list
-            'favorite_stocks': []  # Initialize favorite stocks as empty list
+            'watchlist': []  # Initialize watchlist as empty list
         }
         user_collection.insert_one(user_data)
         return {'message': 'User created successfully'}

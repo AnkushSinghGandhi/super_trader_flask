@@ -231,10 +231,10 @@ def get_sell_history(user_id):
     """
     return UserController.get_sell_history(user_id)
 
-@app.route('/users/<user_id>/favorite_symbols', methods=['POST'])
-def add_favorite_symbols(user_id):
+@app.route('/users/<user_id>/watchlist', methods=['POST'])
+def add_watchlist_items(user_id):
     """
-    Add favorite symbols for a user.
+    Add watchlist items for a user.
     ---
     tags:
       - User
@@ -244,7 +244,7 @@ def add_favorite_symbols(user_id):
         type: string
         required: true
         description: ID of the user
-      - name: favorite_stocks
+      - name: watchlist
         in: formData
         type: array
         items:
@@ -257,12 +257,12 @@ def add_favorite_symbols(user_id):
       404:
         description: User not found
     """
-    return UserController.add_favorite_symbols(user_id)
+    return UserController.add_watchlist_items(user_id)
 
-@app.route('/users/<user_id>/favorite_symbols', methods=['GET'])
-def get_favorite_symbols(user_id):
+@app.route('/users/<user_id>/watchlist', methods=['GET'])
+def get_watchlist_items(user_id):
     """
-    Get favorite symbols of a user.
+    Get watchlist of a user.
     ---
     tags:
       - User
@@ -278,10 +278,10 @@ def get_favorite_symbols(user_id):
       404:
         description: User not found
     """
-    return UserController.get_favorite_symbols(user_id)
+    return UserController.get_watchlist_items(user_id)
 
-@app.route('/users/<user_id>/delete_favorite_symbols', methods=['POST'])
-def delete_favorite_symbols(user_id):
+@app.route('/users/<user_id>/delete_watchlist_items', methods=['POST'])
+def delete_watchlist_items(user_id):
     """
     Delete favorite symbols of a user.
     ---
@@ -293,7 +293,7 @@ def delete_favorite_symbols(user_id):
         type: string
         required: true
         description: ID of the user
-      - name: favorite_stock
+      - name: watchlist
         in: formData
         type: string
         required: true
@@ -304,7 +304,7 @@ def delete_favorite_symbols(user_id):
       404:
         description: User not found or Stock not found in favorites
     """
-    return UserController.delete_favorite_symbols(user_id)
+    return UserController.delete_watchlist_items(user_id)
 
 # Routes for admin APIs
 @app.route('/create_admin', methods=['POST'])
