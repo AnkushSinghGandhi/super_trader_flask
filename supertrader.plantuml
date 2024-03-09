@@ -1,0 +1,61 @@
+@startuml
+allowmixing
+
+package "Flask Application" {
+    package "Controllers" {
+        class QuoteController {
+            + get_ltp(instrument_identifier: str): dict
+            + get_all_instrument_identifiers(): list
+            + get_quote_details(instrument_identifier: str): dict
+        }
+
+        class UserController {
+            + login(): dict
+            + register(): dict
+            + buy(): dict
+            + sell(): dict
+            + get_purchase_history(user_id: str): dict
+            + get_sell_history(user_id: str): dict
+            + add_favorite_symbols(user_id: str): dict
+            + get_favorite_symbols(user_id: str): dict
+            + delete_favorite_symbols(user_id: str): dict
+        }
+
+        class AdminController {
+            + create_admin(): dict
+            + create_user(): dict
+            + pause_user(): dict
+            + ban_user(): dict
+            + get_user_history(user_id: str): dict
+        }
+    }
+
+    package "Models" {
+        class QuoteModel {
+            + get_last_trade_price(instrument_identifier: str): float
+            + get_all_instrument_identifiers(): list
+            + get_quote_details(instrument_identifier: str): dict
+        }
+
+        class UserModel {
+            + create_user(username: str, password: str, email: str, role='user'): dict
+            + get_user_by_id(user_id: str): dict
+            + update_user(user_id: str, update_data: dict): dict
+            + get_user_by_username(username: str): dict
+            + add_purchase_to_history(user_id: str, purchase_data: dict)
+            + add_sale_to_history(user_id: str, sale_data: dict)
+        }
+    }
+
+
+    package "Config" {
+        file config.py
+    }
+
+    UserController --> UserModel : Uses
+    UserController --> QuoteModel : Uses
+    AdminController --> UserModel : Uses
+    QuoteController --> QuoteModel : Uses
+}
+
+@enduml
