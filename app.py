@@ -1,10 +1,13 @@
 from flask import Flask, jsonify, request
 from flasgger import Swagger
+from flask_socketio import SocketIO
+
 from app.controllers.user_controller import UserController
 from app.controllers.admin_controller import AdminController
 from app.controllers.quote_controller import QuoteController
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
 # Swagger configuration
 swagger = Swagger(app)
@@ -30,7 +33,14 @@ def get_ltp():
         description: Instrument not found
     """
     instrument_identifier = request.args.get('instrument_identifier')
-    return QuoteController.get_ltp(instrument_identifier)
+    ltp = QuoteController.get_ltp(instrument_identifier)
+    if ltp is not None:
+        # Emit last trade price data via WebSocket
+        socketio.emit('ltp_update', {'InstrumentIdentifier': instrument_identifier, 'LastTradePrice': ltp})
+        return jsonify({'InstrumentIdentifier': instrument_identifier, 'LastTradePrice': ltp})
+    else:
+        return jsonify({'error': 'Instrument not found'}), 404
+
 
 @app.route('/get_all_instrument_identifiers', methods=['GET'])
 def get_all_instrument_identifiers():
