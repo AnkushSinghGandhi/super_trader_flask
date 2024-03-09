@@ -2,3 +2,4 @@ certifi==2021.5.30
 Flask==2.0.1
 pymongo==3.12.1
 bcrypt==4.1.2
+flask_socketio==6.1.0
