@@ -30,6 +30,9 @@
 # Super Trader Flask
 Super Trader is a Flask-based application designed for learning to trade stocks using live data. It allows users to view real-time & historic stock prices, make purchases, and track their favorite stocks & transaction history. Additionally, the admin panel provides features for managing user accounts, monitoring transactions, and more.
 
+## UML Diagram
+<img src="https://github.com/AnkushSinghGandhi/super_trader_flask/blob/main/repo_images/uml%20diagram.png">
+
 ## Features
 
 - **User Authentication:** Users can register, login, and manage their accounts securely.
@@ -38,9 +41,8 @@ Super Trader is a Flask-based application designed for learning to trade stocks 
 - **Favorite Stocks:** Add and remove favorite stocks for quick access.
 - **Admin Panel:** Manage user accounts, view transaction history, and monitor system activity.
 
-## UML Diagram
-<img src="https://github.com/AnkushSinghGandhi/super_trader_flask/blob/main/repo_images/uml%20diagram.png">
-
+# Swagger API Doc
+<img src="repo_images/swagger.png">
 
 ## Installation
 
