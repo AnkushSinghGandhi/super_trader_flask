@@ -41,9 +41,6 @@ Super Trader is a Flask-based application designed for learning to trade stocks 
 - **Favorite Stocks:** Add and remove favorite stocks for quick access.
 - **Admin Panel:** Manage user accounts, view transaction history, and monitor system activity.
 
-# Swagger API Doc
-<img src="repo_images/swagger.png">
-
 ## Installation
 
 1. **Clone the repository:**
