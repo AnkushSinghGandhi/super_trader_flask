@@ -1,8 +1,13 @@
+from datetime import datetime
 from app.config import db
 
 last_quote_array = db['last_quote_array']
 
-class QuoteModel:
+class LastQuoteArrayModel:
+    @staticmethod
+    def get_last_quote_array():
+        return last_quote_array.find()
+
     @staticmethod
     def get_last_trade_price(instrument_identifier):
         document = last_quote_array.find_one({'InstrumentIdentifier': instrument_identifier})
@@ -22,3 +27,5 @@ class QuoteModel:
             return document
         else:
             return None
+
+
