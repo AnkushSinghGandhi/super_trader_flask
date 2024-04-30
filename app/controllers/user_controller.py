@@ -1,6 +1,6 @@
 from flask import jsonify, request
 from app.models.user_model import UserModel
-from app.models.quote_model import QuoteModel
+from app.models.last_quote_array import LastQuoteArrayModel
 from datetime import datetime
 import bcrypt
 
@@ -57,7 +57,7 @@ class UserController:
         user_id = data.get('user_id')
 
         # Fetch the last trade price for the instrument identifier
-        ltp = QuoteModel.get_last_trade_price(instrument_identifier)
+        ltp = LastQuoteArrayModel.get_last_trade_price(instrument_identifier)
         if ltp is None:
             return jsonify({'error': 'Instrument not found'}), 404
 
@@ -93,7 +93,7 @@ class UserController:
         user_id = data.get('user_id')
 
         # Fetch the last trade price for the instrument identifier
-        ltp = QuoteModel.get_last_trade_price(instrument_identifier)
+        ltp = LastQuoteArrayModel.get_last_trade_price(instrument_identifier)
         if ltp is None:
             return jsonify({'error': 'Instrument not found'}), 404
 
