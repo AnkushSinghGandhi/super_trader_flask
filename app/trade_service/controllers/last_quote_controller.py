@@ -1,5 +1,5 @@
 from flask import jsonify
-from app.models.last_quote_array import LastQuoteArrayModel
+from app.shared.models.last_quote_array import LastQuoteArrayModel
 
 class LastQuoteController:
     @staticmethod

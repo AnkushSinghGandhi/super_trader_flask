@@ -2,9 +2,9 @@ from flask import Flask, jsonify, request
 from flasgger import Swagger
 from flask_socketio import SocketIO
 
-from app.controllers.user_controller import UserController
-from app.controllers.admin_controller import AdminController
-from app.controllers.last_quote_controller import LastQuoteController
+from controllers.user_controller import UserController
+from controllers.admin_controller import AdminController
+from controllers.last_quote_controller import QuoteController
 
 
 app = Flask(__name__)
@@ -35,7 +35,7 @@ def get_ltp():
         description: Instrument not found
     """
     instrument_identifier = request.args.get('instrument_identifier')
-    ltp = LastQuoteController.get_ltp(instrument_identifier)
+    ltp = QuoteController.get_ltp(instrument_identifier)
     if ltp is not None:
         # Emit last trade price data via WebSocket
         socketio.emit('ltp_update', {'InstrumentIdentifier': instrument_identifier, 'LastTradePrice': ltp})
@@ -55,7 +55,7 @@ def get_all_instrument_identifiers():
       200:
         description: Successful operation
     """
-    return LastQuoteController.get_all_instrument_identifiers()
+    return QuoteController.get_all_instrument_identifiers()
 
 @app.route('/get_quote_details', methods=['GET'])
 def get_quote_details():
@@ -77,7 +77,7 @@ def get_quote_details():
         description: Instrument details not found
     """
     instrument_identifier = request.args.get('instrument_identifier')
-    return LastQuoteController.get_quote_details(instrument_identifier)
+    return QuoteController.get_quote_details(instrument_identifier)
 
 # Routes for user APIs
 @app.route('/login', methods=['POST'])

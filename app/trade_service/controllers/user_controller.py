@@ -1,6 +1,6 @@
 from flask import jsonify, request
-from app.models.user_model import UserModel
-from app.models.last_quote_array import LastQuoteArrayModel
+from app.shared.models.user_model import UserModel
+from app.shared.models.last_quote_array import LastQuoteArrayModel
 from datetime import datetime
 import bcrypt
 
