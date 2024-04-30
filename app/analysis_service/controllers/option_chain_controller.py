@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from app.models.last_quote_option_greek_chain import LastQuoteOptionChainModel
+from app.shared.models.last_quote_option_greek_chain import LastQuoteOptionChainModel
 
 class OptionChainController:
     @staticmethod

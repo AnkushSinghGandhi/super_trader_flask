@@ -1,5 +1,5 @@
 from flask import jsonify
-from app.models.last_quote_option_greeks import QuoteOptionGreeksModel
+from app.shared.models.last_quote_option_greeks import QuoteOptionGreeksModel
 
 
 class ImpliedVolatilityController:

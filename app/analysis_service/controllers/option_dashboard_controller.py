@@ -1,6 +1,6 @@
 from flask import jsonify
-from app.models.last_quote_array import LastQuoteArrayModel
-from app.models.last_quote_option_greek_chain import LastQuoteOptionChainModel
+from app.shared.models.last_quote_array import LastQuoteArrayModel
+from app.shared.models.last_quote_option_greek_chain import LastQuoteOptionChainModel
 
 class OptionDashboardController:
     @staticmethod

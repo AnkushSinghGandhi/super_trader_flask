@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from app.models.last_quote_array import LastQuoteArrayModel
+from app.shared.models.last_quote_array import LastQuoteArrayModel
 
 
 class HeatMapController:
