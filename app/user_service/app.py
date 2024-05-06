@@ -1,83 +1,17 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from flasgger import Swagger
-from flask_socketio import SocketIO
 
 from controllers.user_controller import UserController
 from controllers.admin_controller import AdminController
-from controllers.last_quote_controller import QuoteController
+
 
 
 app = Flask(__name__)
-socketio = SocketIO(app)
 
 # Swagger configuration
 swagger = Swagger(app)
 
 
-# Routes for fetching stock data
-@app.route('/get_ltp', methods=['GET'])
-def get_ltp():
-    """
-    Get the last trade price of a stock by instrument identifier.
-    ---
-    tags:
-      - Stock
-    parameters:
-      - name: instrument_identifier
-        in: query
-        type: string
-        required: true
-        description: Instrument identifier of the stock
-    responses:
-      200:
-        description: Successful operation
-      404:
-        description: Instrument not found
-    """
-    instrument_identifier = request.args.get('instrument_identifier')
-    ltp = QuoteController.get_ltp(instrument_identifier)
-    if ltp is not None:
-        # Emit last trade price data via WebSocket
-        socketio.emit('ltp_update', {'InstrumentIdentifier': instrument_identifier, 'LastTradePrice': ltp})
-        return jsonify({'InstrumentIdentifier': instrument_identifier, 'LastTradePrice': ltp})
-    else:
-        return jsonify({'error': 'Instrument not found'}), 404
-
-
-@app.route('/get_all_instrument_identifiers', methods=['GET'])
-def get_all_instrument_identifiers():
-    """
-    Get all instrument identifiers of available stocks.
-    ---
-    tags:
-      - Stock
-    responses:
-      200:
-        description: Successful operation
-    """
-    return QuoteController.get_all_instrument_identifiers()
-
-@app.route('/get_quote_details', methods=['GET'])
-def get_quote_details():
-    """
-    Get the details of a stock by instrument identifier.
-    ---
-    tags:
-      - Stock
-    parameters:
-      - name: instrument_identifier
-        in: query
-        type: string
-        required: true
-        description: Instrument identifier of the stock
-    responses:
-      200:
-        description: Successful operation
-      404:
-        description: Instrument details not found
-    """
-    instrument_identifier = request.args.get('instrument_identifier')
-    return QuoteController.get_quote_details(instrument_identifier)
 
 # Routes for user APIs
 @app.route('/login', methods=['POST'])
@@ -152,6 +86,11 @@ def buy():
         type: string
         required: true
         description: Instrument identifier of the stock
+      - name: Last_Trade_Price
+        in: formData
+        type: string
+        required: true
+        description: Last Trade Price of the stock
       - name: quantity
         in: formData
         type: integer
@@ -183,6 +122,11 @@ def sell():
         type: string
         required: true
         description: Instrument identifier of the stock
+      - name: Last_Trade_Price
+        in: formData
+        type: string
+        required: true
+        description: Last Trade Price of the stock
       - name: quantity
         in: formData
         type: integer
