@@ -1,4 +1,4 @@
-from config import db
+from app.user_service.config import db
 
 user_collection = db['users']
 
