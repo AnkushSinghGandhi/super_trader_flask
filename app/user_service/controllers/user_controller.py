@@ -1,63 +1,18 @@
 from flask import jsonify, request
-from app.shared.models.user_model import UserModel
-from app.shared.models.last_quote_array import LastQuoteArrayModel
+from models.user_model import UserModel
 from datetime import datetime
-import bcrypt
 
 class UserController:
-    @staticmethod
-    def login():
-        data = request.get_json()
-        username = data.get('username')
-        password = data.get('password')
-
-        user = UserModel.get_user_by_username(username)
-        if user:
-            hashed_password = user.get('password')
-            if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
-                # Check role
-                role = user.get('role')
-                if role == 'admin':
-                    return jsonify({'message': 'Admin login successful'})
-                else:
-                    # Check account status
-                    status = user.get('status')
-                    if status == 'active':
-                        return jsonify({'message': 'User login successful'})
-                    elif status == 'paused':
-                        return jsonify({'error': 'Your account is paused. Please contact support.'}), 401
-                    elif status == 'banned':
-                        return jsonify({'error': 'Your account has been banned.'}), 401
-            else:
-                return jsonify({'error': 'Invalid username or password'}), 401
-        else:
-            return jsonify({'error': 'User not found'}), 404
-
-    @staticmethod
-    def register():
-        data = request.get_json()
-        username = data.get('username')
-        password = data.get('password')
-
-        existing_user = UserModel.get_user_by_username(username)
-        if existing_user:
-            return jsonify({'error': 'User already exists'}), 409
-
-        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-        user = {'username': username, 'password': hashed_password}
-
-        UserModel.create_user(user)
-        return jsonify({'message': 'Registration successful'})
-
     @staticmethod
     def buy():
         data = request.get_json()
         instrument_identifier = data.get('instrument_identifier')
+        ltp = data.get('')
         quantity = data.get('quantity')
         user_id = data.get('user_id')
 
         # Fetch the last trade price for the instrument identifier
-        ltp = LastQuoteArrayModel.get_last_trade_price(instrument_identifier)
+
         if ltp is None:
             return jsonify({'error': 'Instrument not found'}), 404
 
@@ -89,11 +44,11 @@ class UserController:
     def sell():
         data = request.get_json()
         instrument_identifier = data.get('instrument_identifier')
+        ltp = data.get('Last_Trade_Price')
         quantity = data.get('quantity')
         user_id = data.get('user_id')
 
         # Fetch the last trade price for the instrument identifier
-        ltp = LastQuoteArrayModel.get_last_trade_price(instrument_identifier)
         if ltp is None:
             return jsonify({'error': 'Instrument not found'}), 404
 

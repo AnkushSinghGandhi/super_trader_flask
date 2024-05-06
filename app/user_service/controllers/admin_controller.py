@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from app.models.user_model import UserModel
+from models.user_model import UserModel
 
 class AdminController:
     @staticmethod
