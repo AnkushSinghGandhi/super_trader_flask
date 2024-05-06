@@ -1,12 +1,12 @@
 ## get_last_quote_Array.json
 ## futures_list = json_data[0]['Result']
 from flask import jsonify, request
-from app.shared.models.last_quote_array import LastQuoteArrayModel
+from models.last_quote_array import LastQuoteArrayModel
 
 
 class FutureDashboardController:
     @staticmethod
-    def get_future_dashboard():
+    def get_future_dashboard_data():
         status = request.args.get('status')
 
         # Fetch data from MongoDB collection
