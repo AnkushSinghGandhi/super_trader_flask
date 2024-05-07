@@ -5,24 +5,31 @@ Welcome to the Analysis Microservice of our application! This microservice plays
 ## Features
 
 ### 1. Future Dashboard
+
 Gain valuable insights into the futures market with comprehensive dashboards showcasing top gainers, top losers, open interest changes, turnover, and more. Our intuitive interface provides traders with a holistic view of the futures landscape, enabling them to identify emerging trends and opportunities.
 
 ### 2. Option Chain Analysis
+
 Dive deep into the world of options trading with our live option chain analysis. Explore Greeks, implied volatility, and other critical metrics to make informed decisions when trading options. Our robust analysis tools empower traders to optimize their options strategies and maximize returns.
 
 ### 3. Heat Map Visualization
+
 Visualize trading activities across different stock indices with our interactive heat map visualization. Quickly identify areas of high activity and market sentiment shifts to stay ahead of the curve. Our heat maps offer a bird's-eye view of the market, allowing traders to spot trends and anomalies with ease.
 
 ### 4. PCR (Put Call Ratio) Analysis
+
 Harness the power of the put-call ratio, a key indicator of market sentiment, to gauge investor sentiment and market direction. Our PCR analysis provides traders with valuable insights into market sentiment, helping them make more informed trading decisions.
 
 ### 5. Implied Volatility Chart
+
 Track changes in implied volatility for different instruments with our comprehensive charts. Implied volatility is a crucial factor in options pricing and risk management. Our charts help traders monitor volatility trends and adjust their strategies accordingly.
 
 ### 6. Routes for Fetching Stock Data
+
 Access essential stock data with ease using our dedicated endpoints. Retrieve the last trade price, all instrument identifiers, and detailed quote information for stocks, enabling seamless integration with external systems and applications.
 
 ### 7. Option Dashboard
+
 Retrieve data for the Option Dashboard effortlessly through our intuitive endpoints. Get access to critical data points and analytics tailored for options traders, empowering them to make data-driven decisions in real-time.
 
 ## Setting Up Docker Container
@@ -79,3 +86,7 @@ Explore our comprehensive API endpoints to access a wide range of analytical fea
 - `/get_all_instrument_identifiers`: Get all instrument identifiers of available stocks.
 - `/get_quote_details`: Get the details of a stock by instrument identifier.
 - `/option_dashboard`: Retrieve data for the Option Dashboard.
+
+## API Documentation
+
+Swagger API documentation is available at `/api/swagger.json` endpoint. You can use Swagger UI or any API client to explore and interact with the API endpoints.
