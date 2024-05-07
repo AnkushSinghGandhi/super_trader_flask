@@ -1,8 +1,9 @@
 from flask import request, jsonify
 from models.user_model import User
 from app import bcrypt
-from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.user_model import UserModel
+from app.user_service.auth import encode_auth_token
 
 
 class AuthController:
@@ -19,12 +20,14 @@ class AuthController:
                 # Check role
                 role = user.get('role')
                 if role == 'admin':
-                    return jsonify({'message': 'Admin login successful'})
+                    auth_token = encode_auth_token(user.id)
+                    return jsonify({'auth_token': auth_token}), 200
                 else:
                     # Check account status
                     status = user.get('status')
                     if status == 'active':
-                        return jsonify({'message': 'User login successful'})
+                        auth_token = encode_auth_token(user.id)
+                        return jsonify({'auth_token': auth_token}), 200
                     elif status == 'paused':
                         return jsonify({'error': 'Your account is paused. Please contact support.'}), 401
                     elif status == 'banned':
@@ -48,7 +51,9 @@ class AuthController:
         user = {'username': username, 'password': hashed_password}
 
         UserModel.create_user(user)
-        return jsonify({'message': 'Registration successful'})
+        # Generate and return JWT token upon successful registration
+        auth_token = encode_auth_token(user.id)
+        return jsonify({'auth_token': auth_token}), 201
 
     @jwt_required()
     def logout():
