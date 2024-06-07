@@ -5,7 +5,7 @@ class LastQuoteController:
     @staticmethod
     def get_ltp(instrument_identifier):
         last_trade_price = LastQuoteArrayModel.get_last_trade_price(instrument_identifier)
-        return jsonify({'InstrumentIdentifier': instrument_identifier, 'LastTradePrice': last_trade_price}) if last_trade_price else jsonify({'error': 'Instrument not found'}), 404
+        return last_trade_price
 
     @staticmethod
     def get_all_instrument_identifiers():
