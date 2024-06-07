@@ -9,7 +9,8 @@ class LastQuoteArrayModel:
 
     @staticmethod
     def get_last_trade_price(instrument_identifier):
-        document = last_quote_array.find_one({'InstrumentIdentifier': instrument_identifier})
+        document = last_quote_array.find_one({'InstrumentIdentifier': instrument_identifier}, sort=[('_id', -1)])
+
         return document['LastTradePrice'] if document else None
 
     @staticmethod
