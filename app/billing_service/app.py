@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import razorpay
+import hashlib
+import hmac
 from config import Config
 
 app = Flask(__name__)
@@ -26,10 +28,42 @@ def charge():
 
 @app.route('/billing/webhook', methods=['POST'])
 def webhook():
-    # Handle Razorpay webhook events here
-    # Verify the webhook signature and process the event
-    # Update payment status in your system accordingly
-    return jsonify({'message': 'Webhook received'}), 200
+    webhook_secret = Config.RAZORPAY_WEBHOOK_SECRET
+    request_data = request.get_data(as_text=True)
+    signature = request.headers.get('X-Razorpay-Signature')
+
+    try:
+        # Verify the webhook signature
+        generated_signature = hmac.new(
+            webhook_secret.encode('utf-8'),
+            request_data.encode('utf-8'),
+            hashlib.sha256
+        ).hexdigest()
+
+        if generated_signature != signature:
+            return jsonify({'error': 'Invalid signature'}), 400
+
+        # Process the event
+        event = request.json
+        event_type = event['event']
+
+        if event_type == 'payment.captured':
+            payment_id = event['payload']['payment']['entity']['id']
+            amount = event['payload']['payment']['entity']['amount']
+            # Update your database with the payment information
+            # Example: mark the order as paid
+
+        elif event_type == 'payment.failed':
+            payment_id = event['payload']['payment']['entity']['id']
+            # Update your database with the failure information
+            # Example: mark the order as failed
+
+        # Handle other event types as necessary
+
+        return jsonify({'message': 'Webhook processed'}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5002, debug=True)
