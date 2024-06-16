@@ -73,12 +73,13 @@ class HeatMapController:
         results_banknifty = []
         results_fno = []
 
+        last_quote_array_data = LastQuoteArrayModel.get_last_quote_array()
+
         for quote2 in last_quote_array_data:
             InstrumentIdentifier = quote2["InstrumentIdentifier"]
             ltp = quote2["LastTradePrice"]
             price_percentage_change = quote2["PriceChangePercentage"]
             server_time = quote2["ServerTime"]
-
             if server_time == instrument_server_time[InstrumentIdentifier]:
                 if any(value.lower() in InstrumentIdentifier.lower() for value in nifty50_constituents):
                     results_nifty50.append({
