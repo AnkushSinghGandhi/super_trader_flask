@@ -4,8 +4,8 @@ from models.last_quote_option_greek_chain import LastQuoteOptionChainModel
 class OptionChainController:
     @staticmethod
     def get_option_chain():
-        symbols = 'AAPL'#request.args.get('symbols')
-        expiry_dates = '2022-04-29' #request.args.get('expiry_dates')
+        symbols = request.args.get('symbols')
+        expiry_dates = request.args.get('expiry_dates')
 
         # Get live option chain data from the model
         option_chain_data = LastQuoteOptionChainModel.get_live_option_chain(symbols, expiry_dates)
